@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+<!--seperate functionality from sytle, do style tabs within style tabs or (recommended) use exteranal file with .css extension-->
+
+<html>
+    <head>
+        <title>CSS Cheat Sheet</title>
+        <!--use to link to css sheet-->
+        <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+         <!--dont do this either-->
+<!--        <style type="text/css">
+            h1{
+                color:blue
+            }
+        </style>
+-->
+    </head>
+    <body>
+
+        <!--dont do this-->
+        <!--
+        <h1 style="color:red">Hello</h1>
+-->
+<!--id- use for unique things only used once, do not repeat id's-->
+<!--can reuse classes-->
+<div class="container">
+    <div class = "box-1">
+        <h1>Hello</h1>
+        <p>Stuff stuff werods 
+            sdfsdfsgf sdfgfdg
+            sfgnmyumnsdate
+            agganbrebt.
+        </p>
+    </div>
+
+    <div class = "box-2">
+        <h1>Bye World</h1>
+        <p>Stuff stuff werods 
+            sdfsdfsgf sdfgfdg
+            sfgnmyumnsdate
+            agganbrebt.
+        </p>
+        <a class="button" href="">Read More</a>
+    </div>
+    <div class="catagories">
+        <h2>Catagories</h2>
+        <ui>
+            <li><a href='#'>Catagory 1</a></li>
+            <li><a href='#'>Catagory 2</a></li>
+            <li><a href='#'>Catagory 3</a></li>
+            <li><a href='#'>Catagory 4</a></li>
+        </ui>
+    </div>
+    <form class="my-form">
+        <div class="form-group">
+            <label>Name:</label>
+            <input type="text" name="name">
+        </div>
+        <div class="form-group">
+            <label>Email:</label>
+            <input type="text" name="email">
+        </div>
+        <div class="form-group">
+            <label>Message:</label>
+            <textarea name="message"></textarea>
+        </div>
+        <input class="button" type="submit" value="submit" name="">
+
+    </form>
+
+    <!--floats-->
+    <div class="block">
+        <h3>Heading</h3>
+        <p>stufdgafdh shagfghgdaf
+            adfhgadfhgagdfsfaha
+        </p>
+    </div>
+    <div class="block">
+        <h3>Heading</h3>
+        <p>stufdgafdh shagfghgdaf
+            adfhgadfhgagdfsfaha
+        </p>
+    </div>
+    <div class="block">
+        <h3>Heading</h3>
+        <p>stufdgafdh shagfghgdaf
+            adfhgadfhgagdfsfaha
+        </p>
+    </div>
+
+    <div class="clr"></div> <!--use after floats to reset the boundaries-->
+
+    <div id="main-block">
+        <h3>Heading</h3>
+        <p>stufdgafdh shagfghgdaf
+            adfhgadfhgagdfsfaha
+        </p>
+    </div>
+    
+    <div id="sidebar">
+            <p>stufdgafdh shagfghgdaf
+                adfhgadfhgagdfsfaha
+            </p>
+    </div>
+    
+    <div class="clr"></div> <!--use after floats to reset the boundaries-->
+    
+    <div class="p-box">
+        <h1>Hello</h1>
+        <h2>Goodbye</h2>
+    </div>
+
+    <ul class="my-list">
+        <li>List Item</li>
+        <li>List Item</li>
+        <li>List Item</li>
+        <li>List Item</li>
+        <li>List Item</li>
+        <li>List Item</li>
+        <li>List Item</li>
+        <li>List Item</li>
+        <li>List Item</li>
+        <li>List Item</li>
+        <li>List Item</li>
+
+    </ul>
+
+</div> <!--container ends-->
+
+<a class="button" class="fix-me button" href="">Hello</a>
+
+<div style="margin-top: 500px;"></div>
+    </body>
+</html>

@@ -1,0 +1,374 @@
+/*need to set the header in a relative postion div
+
+body{
+    position: fixed;
+    margin-top: 0em;
+    width: 100%;
+    margin-left: 0em;
+}
+
+.container{
+    width:100%;
+    margin: auto;
+    overflow: hidden;
+
+}
+
+.container{
+    width:100%;
+    height: 100%;
+    margin: auto;
+    overflow: hidden;
+
+}
+
+header{
+    top: 0;
+    min-height: 10px;
+    overflow:hidden;
+    background-color:grey;
+    color:#555;
+    font-family: Arial, Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    line-height: 1.6em;
+    /*margin: 0 -9999rem;
+    padding: 0.25rem 9999rem;
+    padding: 0.25rem;
+    margin-top: 0em;
+}
+
+#nav-bar{
+    width: 100%;
+    height: 300px;
+}
+
+#nav-bar ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: darkgrey;
+    margin-right: 0em;
+    margin-left: 0em;
+    width: 100%;
+    height: 35%;
+
+}
+
+#nav-bar li {
+    float: left;
+    margin-top: 2%;
+
+
+  }
+
+#nav-bar a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+
+}
+
+#nav-bar a:hover{
+    background-color: slategrey;
+}
+
+#nav-bar #login-logout{
+    float: right;
+}
+
+#nav-bar #login-logout #login_button{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+    background-color: green;
+}
+
+#nav-bar #login-logout #login_button:hover{
+    background-color: lightgreen;
+}
+
+#nav-bar #login-logout #setting_button{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+    background-color: skyblue;
+}
+
+#nav-bar #login-logout #setting_button:hover{
+    background-color: lightblue;
+}
+
+*/
+
+
+body{
+    font: 15px/1.5 Arial, Helvetica, sans-serif;
+    padding: 0;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+/*global*/
+.container{
+    width: 80%;
+    margin: auto; /*sets to middle*/
+    overflow: hidden; /*if goes outside a div will be hidden*/
+}
+
+/*by default have padding and margin so set to 0*/
+ul{
+    margin: 0;
+    padding: 0;
+}
+
+.button_1{
+    height: 38px;
+    background-color: #3297DB;
+    border: #65afe0 4px outset;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #ECF0F1;
+}
+
+header{
+    background-color: #EB4c3D;
+    color: #ECF0F1;
+    padding-top: 35px;
+    min-height: 70px; /*when screen is small and test goes bigger will grow*/
+    border-bottom: #060606 3px solid;
+
+}
+
+header a{
+    color: #ECF0F1;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+
+
+header li{
+    float:left;
+    display: inline; /*displays in line with other items in the block so does not push it down*/
+    padding: 0 20px 0 20px; /* top right bottom left*/
+}
+
+/*move the header to the left side*/
+header #branding{
+    float: left;
+}
+
+header .highlight, header .current a{
+    color: #2C3F50;
+    font-weight: bold;
+    text-shadow: 2px 0 #2C3F50; /*use to make bolder*/
+}
+
+header #branding h1{
+    margin: 0;
+}
+
+header nav{
+    float:right;
+    margin-top: 10px;
+}
+
+header nav a{
+    font-weight: bold;
+}
+
+header nav a:hover{
+    color: #2C3F50;
+}
+
+/*show case*/
+/*never set a fixed height, set a min height*/
+#showcase{
+    position: relative; /*added*/
+    min-height: 400px;
+    /*background: url('wlecome_page_2.jpg') no-repeat;*/
+    
+}
+
+/*added- use this to seperate out the background image and avoid making the text also transparent*/
+#showcase::before{
+    content: "";
+    background-image: url('wlecome_page_2.jpg');
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.2;
+}
+
+#showcase h1{
+    position: relative; /*added*/
+    text-align: center;
+    vertical-align: middle;
+    color: black;
+    text-shadow: 1.5px 0 #2C3F50; /*use to make bolder*/
+    font-size: 55px;
+    margin-top: 100px;
+    margin-bottom: 10px;
+}
+
+#showcase p{
+    position: relative; /*added*/
+    text-align: center;
+    vertical-align: middle;
+    color: black;
+    font-size: 20px;
+
+}
+
+/*news letter*/
+#newsletter{
+    padding: 15px;
+    background-color: #EB4c3D;
+    color: #f4f4f4;
+    border-bottom: #060606 3px solid;
+    border-top: #060606 3px solid;
+
+}
+
+#newsletter h1{
+    float: left;
+
+}
+
+
+#newsletter form{
+    display: inline;
+    float: right;
+    margin-top: 15px;
+    
+}
+
+#newsletter input[type="email"]{
+    padding: 4px;
+    height: 25px;
+    width: 250px;
+    
+}
+
+/*boxes*/
+#services{
+    margin-top: 20px;
+}
+
+#services .box{
+    float: left;
+    text-align: center;
+    width: 30%;
+    padding: 10px;
+}
+
+#services .box img{
+    width:  275px;
+    height: 275px;
+    object-fit: cover;
+}
+
+/*footer*/
+
+footer{
+    padding: 20px;
+    margin-top: 20px;
+    color: #f4f4f4;
+    background-color: #2C3F50;
+    text-align: center;
+}
+
+
+/*media query- use to make look good when small width*/
+
+@media(max-width: 1128px){ /*tablet size*/
+    
+    #services .box{
+        float: none;
+        text-align: center;
+        width: 100%;   
+    }
+
+    #services .box img{
+        width:  400px;
+        height: 400px;
+        object-fit: cover;
+    }
+}
+
+@media(max-width: 900px){ /*tablet size*/
+    
+    #newsletter h1,
+    #newsletter form{
+        float: none;
+        text-align: center;
+        width: 100%;
+        
+    }
+
+    #newsletter button{
+        display: block;
+        width: 100%;
+    }
+    #newsletter form input[type="email"]{
+        width: 100%;
+        margin-bottom: 5px;
+        text-align: center;
+    }
+}
+
+@media(max-width: 786px){ /*tablet size*/
+    header #branding, 
+    header nav, 
+    header nav li,
+    #newsletter h1,
+    #newsletter form,
+    #services .box{
+        float: none;
+        text-align: center;
+        width: 100%;
+        
+    }
+
+    header{
+        padding-bottom: 20px;
+    }
+
+    #showcase h1{
+        margin-top: 40px;
+    }
+
+    #newsletter button{
+        display: block;
+        width: 100%;
+    }
+    #newsletter form input[type="email"]{
+        width: 100%;
+        margin-bottom: 5px;
+        text-align: center;
+    }
+
+    #services .box img{
+        width:  250px;
+        height: 250px;
+        object-fit: cover;
+    }
+}
+
+
+
+
+
+
+
