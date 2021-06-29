@@ -165,6 +165,42 @@ header li{
 header #branding{
     float: left;
 }
+header #search_bar{
+    display: inline;
+    float:right;
+    margin-top: -3px;
+    margin-right: 0px;
+    margin-left: 20px;
+}
+
+header #search_bar input[type = "search"]{
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 17px;
+    border: none;
+}
+
+header #search_bar .button_2{
+    float: right;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+header #search_bar .button_2 img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: cover;
+    width: 20px;
+    height: 20px;
+}
+
+
 
 header .highlight, header .current a{
     color: #2C3F50;
