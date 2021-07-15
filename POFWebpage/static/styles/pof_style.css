@@ -146,9 +146,7 @@ header{
 
 }
 
-/*#container-header{
-    display: flex;
-}*/
+
 
 header a{
     color: #ECF0F1;
@@ -351,36 +349,33 @@ footer{
     }
 }
 
-/*@media(max-width: 1090px){ /*search bar reactive
+@media(max-width: 1090px){ /*search bar reactive*/
     
-    header #search_bar, 
-    header nav
+    header .container
     {
-        float: right;
-        text-align: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    header nav {
+        width: 48%;
+        margin-bottom: 2%;
+      }
+
+    header #branding{
+        width: 48%;
+        margin-bottom: 2%;
+    }
+      
+    header #search_bar:nth-child(3n) {
         width: 100%;
-        display:block;
+      }
+      header #search_bar{
+        margin-top: 10px;
+      }
 
-    }
-
-    header #search_bar input[type = "search"]{
-        float: left;
-        display: flex;
-        width: 70%;
-        margin-right: 0px;
-
-    }
-
-    header #search_bar .button_2{
-        display: flex;
-        float: none;
-        width: 30%;
-        margin-left: 0px;
-
-
-    }
-
-}*/
+}
 
 
 
@@ -406,9 +401,9 @@ footer{
 }
 
 @media(max-width: 786px){ /*tablet size*/
-    header #branding, 
+    /*header #branding, 
     header nav, 
-    header nav li,
+    header nav li,*/
     #newsletter h1,
     #newsletter form,
     #services .box{
@@ -418,9 +413,16 @@ footer{
         
     }
 
-    header{
-        padding-bottom: 20px;
+    header .container
+    {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
     }
+
+    /*header{
+        padding-bottom: 20px;
+    }*/
 
     #showcase h1{
         margin-top: 40px;
@@ -443,7 +445,41 @@ footer{
     }
 }
 
+@media(max-width: 748px){ /*tablet size*/
 
+
+    header .container
+    {
+        display: column;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    header nav {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        margin-left: auto;
+      }
+
+    header #branding{
+        width: 100%;
+        margin-bottom: 2%;
+        justify-content: center;
+        text-align: center;
+    }
+      
+    header #search_bar {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        margin-top: 0px;
+
+      }
+
+}
 
 
 
