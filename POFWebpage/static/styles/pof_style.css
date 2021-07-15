@@ -146,6 +146,10 @@ header{
 
 }
 
+/*#container-header{
+    display: flex;
+}*/
+
 header a{
     color: #ECF0F1;
     text-decoration: none;
@@ -189,6 +193,10 @@ header #search_bar .button_2{
     font-size: 17px;
     border: none;
     cursor: pointer;
+}
+
+header #search_bar .button_2:hover{
+    background-color: darkgrey;
 }
 
 header #search_bar .button_2 img{
@@ -328,7 +336,7 @@ footer{
 
 /*media query- use to make look good when small width*/
 
-@media(max-width: 1128px){ /*tablet size*/
+@media(max-width: 1128px){ 
     
     #services .box{
         float: none;
@@ -343,7 +351,40 @@ footer{
     }
 }
 
-@media(max-width: 900px){ /*tablet size*/
+/*@media(max-width: 1090px){ /*search bar reactive
+    
+    header #search_bar, 
+    header nav
+    {
+        float: right;
+        text-align: center;
+        width: 100%;
+        display:block;
+
+    }
+
+    header #search_bar input[type = "search"]{
+        float: left;
+        display: flex;
+        width: 70%;
+        margin-right: 0px;
+
+    }
+
+    header #search_bar .button_2{
+        display: flex;
+        float: none;
+        width: 30%;
+        margin-left: 0px;
+
+
+    }
+
+}*/
+
+
+
+@media(max-width: 900px){ 
     
     #newsletter h1,
     #newsletter form{
