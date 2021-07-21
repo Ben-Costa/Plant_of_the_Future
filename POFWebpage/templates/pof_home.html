@@ -1,51 +1,9 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width">
-        <meta name="description" content="Industry 4.0 Web Service">
-        <meta name="keywords" content="Industry 4.0, Data Science, Data Engineering, Manufacturing">
-        <meta name="author" content="Ben Costa">
-        <title>
-            Plant of the Future | Welcome
-        </title>
-        <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='styles/pof_style.css') }}">
-    </head>
-    <body>
-        <header>
-            <div class="container">
-                <div id= "branding">
-                    <h1><span class = "highlight">POF</span> Web Solutions</h1> <!--span is inline level elements- if wrapped in div would go in own line-->
-                </div>
-                
-                <nav>
-                    <ul>
-                        <li ><a href="home.html">Home</a></li>
-                        <li ><a href="about.html">About</a></li>
-                        <li ><a href="login.html">Log In</a></li>
-                    </ul>
-             </nav>
-            </div>
-        </header>
+{% block title %}Home{% endblock %}
 
-        <section id='showcase'>
-            <div class='container'>
-                <h1>Industry 4.0 Solutions</h1>
-                <p>Bringing manufacturing firms into the future through the utilization of emerging technologies to connect and manage assets.</p>
-            </div>
-        </section>
 
-        <section id="newsletter">
-            <div class='container'>
-                <h1>Suscribe to our mailing list</h1>
-                <form>
-                    <input type="email" placeholder="Enter Email...">
-                    <button type="submit" class="button_1">Subscribe</button>
-                </form>
-            </div>
-        </section>
-
+{% block body_contents %}
         <section id="services">
             <div class="container">
                 <div class="box">
@@ -65,12 +23,4 @@
                 </div>
             </div>
         </section>
-        
-        <footer>
-            <p>
-                POF TECHNOLOGIES, Copyright &copy; 2021
-            </p>
-            
-        </footer>
-    </body>
-</html>
+{% endblock %}

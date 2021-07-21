@@ -332,6 +332,119 @@ footer{
 }
 
 
+/* about page */
+
+#info{
+    display: flex;
+    width: 80%;
+    margin: auto; 
+    overflow: hidden;
+    margin-top: 20px;
+}   
+
+#info #contents{
+    flex: 2;
+    order: 1;
+    margin-right: 20px;
+}
+
+#info #contents #values{
+    background-color: #EB4c3D;
+    margin: 10px;
+    border: #060606 3px solid;
+    padding: 20px;
+}
+
+#info #contents #expertise{
+    background-color: #EB4c3D;
+    margin: 10px;
+    border: #060606 3px solid;
+    padding: 20px;
+}
+
+#info #contents #postions{
+    background-color: #EB4c3D;
+    margin: 10px;
+    border: #060606 3px solid;
+    padding: 20px;
+}
+
+
+#info #sidebar{
+    flex: 1;
+    order: 2;
+    background-color: #2C3F50;
+    margin-left: 10px;
+    margin-top: 10px;
+    padding: 20px;
+    color: #ECF0F1;
+    border: #060606 3px solid;
+}
+
+
+/* login page */
+
+#showcase_login{
+    position: relative; /*added*/
+    min-height: 600px;
+    /*background: url('wlecome_page_2.jpg') no-repeat;*/
+    margin-top: 20px;
+}
+
+
+/*added- use this to seperate out the background image and avoid making the text also transparent*/
+#showcase_login::before{
+    content: "";
+    background-image: url('wlecome_page_2.jpg');
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.2;
+}
+
+#showcase_login #login_container{
+    width: 30%;
+    position: relative; /*added*/
+    text-align: center;
+    margin: auto;
+    vertical-align: middle;
+    background-color: white;
+    margin-top: 100px;
+    padding-bottom:60px;
+
+}
+
+#showcase_login #login_container form{
+    position: relative; /*added*/
+    text-align: center;
+    vertical-align: middle;
+}
+
+#showcase_login h1{
+    position: relative; /*added*/
+    text-align: center;
+    vertical-align: middle;
+    color: black;
+    text-shadow: 1.5px 0 #2C3F50; /*use to make bolder*/
+    font-size: 55px;
+    margin-bottom: 10px;
+}
+
+#showcase_login p{
+    position: relative; /*added*/
+    text-align: center;
+    vertical-align: middle;
+    color: black;
+    font-size: 20px;
+
+}
+
+
+
+
 /*media query- use to make look good when small width*/
 
 @media(max-width: 1128px){ 
