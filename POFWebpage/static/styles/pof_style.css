@@ -411,9 +411,11 @@ footer{
     text-align: center;
     margin: auto;
     vertical-align: middle;
-    background-color: white;
+    background-color: #EB4c3D;
     margin-top: 100px;
-    padding-bottom:60px;
+    padding-bottom:30px;
+    padding-top: 10px;
+    border-radius: 5px;
 
 }
 
@@ -440,6 +442,10 @@ footer{
     color: black;
     font-size: 20px;
 
+}
+
+#showcase_login .button_1{
+    margin-top: 30px;
 }
 
 

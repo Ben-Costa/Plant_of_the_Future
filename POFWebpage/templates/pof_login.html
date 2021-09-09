@@ -39,14 +39,36 @@
         <section id='showcase_login'>
             <div class='container'>
                 <div id = "login_container">
-                <h1>Login</h1>
-                <form>
-                    <label for= "username">Username:</label><br>
-                    <input type="email" id = "username" placeholder="Enter Email..."><br>
-                    <label for= "password">password:</label><br>
-                    <input type="text" id = "password" placeholder="Enter Email..."><br>
-                    <button type="submit" class="button_1">Login</button>
+                    <!--
+                        
+                    -->
+
+                    
+                    <h1>Login</h1>
+          
+                    <form method = "POST" action = "">
+                    
+                    {{ form.hidden_tag() }}
+                    
+                    
+                    <label for= "Email">Email:</label><br>
+                    <input type="email" id = "email" placeholder="Enter Email..."><br>
+                    <label for= "password">Password:</label><br>
+                    <input type="password" id = "password" placeholder="Enter Password..."><br>
+                    <button type="submit" class="button_1">Login</button> 
+
+
+
                 </form>
+
+                <div class = "register_link">
+
+                    <small class="link_text">
+                        Already Have An Account? <a class="link" href="{{url_for('registration_page')}}">Register</a>
+                    </small>
+
+                </div>
+
             </div>
             </div>
         </section>
