@@ -18,10 +18,16 @@ def contact_page():
 @app.route('/login', methods = ["GET", "POST"])
 def login_page():
     form = LoginForm()
+    
     if form.validate_on_submit():
-        flash(f'Account created for {form.email.data}')
+        print('hi')
+        flash(f'Account created for {form.email.data}', 'Success')
         return redirect(url_for('about_page'))
-    return render_template('pof_login.html', form = form)
+    if not form.validate_on_submit():
+        print(form.email.errors)
+        print(form.password.errors)
+        flash(f'Error for {form.email.data}', 'Error')
+    return render_template('pof_login.html', title ='Login', form = form)
 
 @app.route('/register', methods = ["GET", "POST"])
 def registration_page():
