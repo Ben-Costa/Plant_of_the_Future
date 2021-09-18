@@ -21,7 +21,7 @@ def login_page():
     
     if form.validate_on_submit():
         print('hi')
-        flash(f'Account created for {form.email.data}', 'Success')
+        flash(f'Account created for {form.email.data}', 'success')
         return redirect(url_for('about_page'))
     return render_template('pof_login.html', title ='Login', form = form)
 
