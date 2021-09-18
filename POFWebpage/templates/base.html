@@ -39,6 +39,17 @@
 
         <section id='showcase'>
             <div class='container'>
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}    
+                            <div class = "alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
                 <h1>Industry 4.0 Solutions</h1>
                 <p>Bringing manufacturing firms into the future through the utilization of emerging technologies to connect and manage assets.</p>
             </div>
