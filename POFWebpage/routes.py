@@ -1,6 +1,8 @@
-from POFWebpage import app
+from POFWebpage import app, db
 from flask import render_template, redirect, url_for, flash, redirect
 from POFWebpage.forms import RegistrationForm, LoginForm
+from POFWebpage.UserClass import User
+import hashlib
 
 @app.route('/')
 @app.route('/home')
@@ -30,7 +32,18 @@ def login_page():
 def registration_page():
     form = RegistrationForm()
     if form.validate_on_submit():
+        
         print('hi')
+
+        #convert password to sha256 hash
+        hash_pass = hashlib.sha256()### this creates hash, not the hash password, will need to store both
+        print(hash_pass.hexdigest())
+        ###################need to test
+        try:  
+            newUser = User(form.username, form.email, hash_pass)
+        except:
+            print("Error making user. Please try again")
+
         flash(f'Account created for {form.email.data}', 'success')
         return redirect(url_for('about_page'))
     return render_template('pof_registration.html', form = form)
