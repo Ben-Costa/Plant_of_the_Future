@@ -16,26 +16,28 @@ class User:
             self.Username = Username
             self.email = email    
             self.salt = os.urandom(32)
-            self.password = password   
+            self.password = User.hashPassword(password, self.salt)   
             #self.organization = organization
         else:
             self.Username = Username
             self.email = email    
-            self.password = password
             #salt will be stored as byte
             if isinstance(salt, bytes):
                 self.salt = salt 
             else:
-               self.salt = salt.encode('utf-8') 
+               self.salt = salt.encode('utf-8')
+            self.password = User.hashPassword(password, salt)  
             #self.organization = organization
-    
+
+#######Depreciated######################    
     #Requires: 
     #Modifies: 
     #Effects: Will create a hashed password from the user salt and the password
-    def hashUserPassword(self):
-        #below is old code that didnt work
-        #return hashlib.pbkdf2_hmac('sha256',self.password.encode('utf-8'),self.salt, 100000).decode()
-        return hashlib.pbkdf2_hmac('sha256',self.password.encode('utf-8'),self.salt, 100000)
+#    def hashUserPassword(self):
+#        #below is old code that didnt work
+#        #return hashlib.pbkdf2_hmac('sha256',self.password.encode('utf-8'),self.salt, 100000).decode()
+#        return hashlib.pbkdf2_hmac('sha256',self.password.encode('utf-8'),self.salt, 100000)
+#######################################3
 
     def hashPassword(psw, salt):
         if not isinstance(salt, bytes) :
@@ -46,26 +48,23 @@ class User:
 
         return hashlib.pbkdf2_hmac('sha256', psw, salt, 100000)
     
-    #Requires: 
+    #Requires: string pswd
     #Modifies: 
-    #Effects: 
+    #Effects: When called and given a password, will return if the key that results from hashing the password is 
+    #equal to the key of the current user
     def checkPassWordsMatch(self, pswd):
         hashedCheckPassword = User.hashPassword(pswd, self.salt)
-        return hashedCheckPassword == self.hashUserPassword() 
+        return hashedCheckPassword == self.password 
 
     #Requires: 
     #Modifies: Will create a dictionary which is transformed into a JSON
     #Effects: When called, will return a json format of the user class
     def userToJson(self):
 
-#        print(type(self.salt))
-#        print(self.salt.decode('utf-8'))
-#        print(bytes(self.hashUserPassword()))
-
         user_Dict = {
             "_id" : self.Username,
             "email": self.email,
-            "password": binascii.hexlify(self.hashUserPassword()).decode('utf-8'),
+            "password": binascii.hexlify(self.password).decode('utf-8'),
             #code that didnt work"password": str(self.hashUserPassword()).replace("'", '"'),#.decode('utf-8'),
             "salt": binascii.hexlify(self.salt).decode('utf-8')#.replace("'", '"')
             #"first_name": self.first_name,
@@ -81,10 +80,10 @@ class User:
     #Modifies: 
     #Effects: When called, will return a user class that is created from the passed json object. Will only pass a user object if
     #the json contains all the needed info
-    def jsonToUser(self, user_json):
+    def jsonToUser(user_json):
         
-        user_dict = json.load(user_json)
-        if all (keys in user_dict for keys in ('_id', 'email', 'password', 'salt')):
+        user_dict = json.loads(user_json)
+        if User.verifyIfJsonIsUser(user_dict):
             return User(user_dict['_id'], user_dict['email'], user_dict['password'], user_dict['salt'])
         else:
             return "Error: Json does not have all required fields to be a user"
@@ -94,8 +93,13 @@ class User:
     #Requires: Json object
     #Modifies: 
     #Effects: Will check if the json contains all the information to be classified as a user
-    def verifyIfJsonIsUser(json):
-        pass
+    def verifyIfJsonIsUser(user_dict):
+        
+        if all (keys in user_dict for keys in ('_id', 'email', 'password', 'salt')):
+            return True
+        else:
+            return False
+
     
 
 
