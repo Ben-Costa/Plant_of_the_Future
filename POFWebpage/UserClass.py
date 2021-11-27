@@ -37,7 +37,7 @@ class User:
 #        #below is old code that didnt work
 #        #return hashlib.pbkdf2_hmac('sha256',self.password.encode('utf-8'),self.salt, 100000).decode()
 #        return hashlib.pbkdf2_hmac('sha256',self.password.encode('utf-8'),self.salt, 100000)
-#######################################3
+#######################################
 
     def hashPassword(psw, salt):
         if not isinstance(salt, bytes) :
@@ -65,13 +65,12 @@ class User:
             "_id" : self.Username,
             "email": self.email,
             "password": binascii.hexlify(self.password).decode('utf-8'),
-            #code that didnt work"password": str(self.hashUserPassword()).replace("'", '"'),#.decode('utf-8'),
+            #"password": str(self.hashUserPassword()).replace("'", '"'),#.decode('utf-8'),
             "salt": binascii.hexlify(self.salt).decode('utf-8')#.replace("'", '"')
             #"first_name": self.first_name,
             #"last_name": self.last_name,
             #"organization": self.organization
          }
-
 
         return json.dumps(user_Dict)
 
@@ -99,9 +98,6 @@ class User:
             return True
         else:
             return False
-
-    
-
 
 
 #Usage

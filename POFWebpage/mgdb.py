@@ -1,3 +1,4 @@
+from typing_extensions import ParamSpecKwargs
 from flask import Flask
 import pymongo 
 from pymongo import MongoClient
@@ -43,11 +44,17 @@ class POFDB:
 
         #self.userCollection.insert_one({"_id": 1 ,"name" : "Ben"})
 
+    #Requires: 
+    #Modifies: 
+    #Effects:
     def verify_Location():
         pass
 
-    #User interface
-
+    #####User interface#####
+    #Requires: userName
+    #Modifies: 
+    #Effects: When passed a User json, will check if the user _id exists in the user collection.
+    #         if the user exists, then will return true. Else will return false.
     def checkForUser(self, User):
         
         userCheck = self.userCollection.find_one({"_id" : User.username})
@@ -58,7 +65,11 @@ class POFDB:
         else:
             return True
 
-
+    #Requires: User json
+    #Modifies: Will add a user to the user collection in the database
+    #Effects: When passed a user json, will first check to see if the user exists with the
+    #         checkForUser function. If true is returned, will give an error saying the user
+    #         exists in the database. Else the user is added to the user collection and 1 is returned
     def addUser(self, User):
         
         if self.checkForUser:
@@ -67,7 +78,9 @@ class POFDB:
             self.userCollection.insert_one(User)
             return 1
 
-
+    #Requires: userName
+    #Modifies: will return a user json of the specificed username
+    #Effects:
     def getUser(self, User):
         
         if not self.checkForUser:
@@ -75,8 +88,13 @@ class POFDB:
         else:
             return self.userCollection(User)
 
-
-
+    
+    #Requires: User
+    #Modifies: will delete user from db class
+    #Effects: Will delete the user from the user collection based on the if the 
+    #         username exists. 
+    def deleteUser(self, User):
+        pass
 
 
 
