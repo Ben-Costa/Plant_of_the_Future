@@ -33,17 +33,12 @@ def registration_page():
     form = RegistrationForm()
     if form.validate_on_submit():
         
-        print('hi')
-
-        #convert password to sha256 hash
-        hash_pass = hashlib.sha256()### this creates hash, not the hash password, will need to store both
-        print(hash_pass.hexdigest())
-        ###################need to test
         try:  
-            newUser = User(form.username, form.email, hash_pass)
+            newUser = User(form.username, form.email, form.password)
+            if db.addUser(newUser.userToJson()):
+                flash(f'Account created for {form.email.data}', 'success')
+                return redirect(url_for('about_page'))
         except:
             print("Error making user. Please try again")
-
-        flash(f'Account created for {form.email.data}', 'success')
-        return redirect(url_for('about_page'))
+            
     return render_template('pof_registration.html', form = form)
