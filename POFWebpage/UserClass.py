@@ -39,6 +39,17 @@ class User:
 #        return hashlib.pbkdf2_hmac('sha256',self.password.encode('utf-8'),self.salt, 100000)
 #######################################
 
+    #Getters
+    def getUserName(self):
+        return self.Username
+    
+    def getPassword(self):
+        return self.password
+
+    def getEmail(self):
+        return self.email
+
+    
     def hashPassword(psw, salt):
         if not isinstance(salt, bytes) :
             salt = salt.encode('utf-8')
@@ -114,50 +125,7 @@ if __name__ == '__main__':
     newUser.check_existance()
     newUser.addUserToDB()
     
-    
-    #On registration
-    #1. Get form info
-    #2. Check if username exists in db- if false go to #3 else send error message- user already exists
-    #3. Make a new user class with info- user class initialization (with only 3 arguements (no salt)) will be returned- 3 arguments will make a salt and hash the password
-    #4. call add to db
-    #5. add to db will first verify user does not exist, if true
-    #6. add information to the db
-    # 
-    # On login
-    #1. get form info
-    #2. check if username exists- if true go to 3, else error message username not found
-    #3. pull user from db using the given username
-    #4. using given salt from pulled user info, call function to compare password- so verifyPassword(enteredPassword)- will do the encoding and return
-    #whether the hashed password matches stored password
-    #5. if match- successful login
 
 
 
-        #Requires: db object
-    #Modifies: 
-    #Effects: When called, will check if the username exists in the database, if not will return false, if the user is in the db will return true
-    #def checkIfUserExistsInDB(username, db):
-        
-        #pass to database to make sure doesnt exist- pass the user_to_json
-    #    dbCheck = db.checkForUser(username)
-        
-        #if exists return error
-    #    if dbCheck == 1:
-    #        return 1
-    #    else:
-        #if not return user successfully created
-    #        return dbCheck
 
-
-        #Requires: db object
-    #Modifies: will add user to db
-    #Effects: Will create a hashed password from the user salt and the password
-    #def addUserToDB(self, db):
-        #pass user to database to attempt creating a new user
-    #    return db.addUser(self.user_to_json())
-    
-    #Requires: db object, username
-    #Modifies: creates user from db
-    #Effects: Will create a hashed password from the user salt and the password
-    #def getUserFromDatabase(userName, db):
-    #    pass

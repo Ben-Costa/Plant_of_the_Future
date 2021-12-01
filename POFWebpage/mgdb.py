@@ -44,6 +44,9 @@ class POFDB:
 
         #self.userCollection.insert_one({"_id": 1 ,"name" : "Ben"})
 
+    def getConnectionStatus(self):
+        return self.connection_status
+
     #Requires: 
     #Modifies: 
     #Effects:
@@ -55,11 +58,9 @@ class POFDB:
     #Modifies: 
     #Effects: When passed a User json, will check if the user _id exists in the user collection.
     #         if the user exists, then will return true. Else will return false.
-    def checkForUser(self, User):
-        
-        jsonDict = json.loads(User)
+    def checkForUser(self, userName):
 
-        userCheck = self.userCollection.find_one({"_id" : jsonDict['_id']})
+        userCheck = self.userCollection.find_one({"_id" : userName})
 
         if userCheck == None:
             return False
@@ -72,37 +73,34 @@ class POFDB:
     #         checkForUser function. If true is returned, will give an error saying the user
     #         exists in the database. Else the user is added to the user collection and 1 is returned
     def addUser(self, User):
-
-        if self.checkForUser(User):
+        jsonDict = json.loads(User)
+        if self.checkForUser(jsonDict['_id']):
             return False
         else:
-            jsonDict = json.loads(User)
             self.userCollection.insert_one(jsonDict)
             return True
 
     #Requires: userName
     #Modifies: will return a user json of the specificed username
-    #Effects:
-    def getUser(self, User):
+    #Effects: when called, if the username exists in the db, will return the user, else return false
+    def getUser(self, userName):
         
-        if not self.checkForUser(User):
+        if not self.checkForUser(userName):
             return False
         else:
-            jsonDict = json.loads(User)
-            return self.userCollection.find_one({"_id" : jsonDict['_id']})
+            return self.userCollection.find_one({"_id" : userName})
 
     
-    #Requires: User
+    #Requires: userName
     #Modifies: will delete user from db class
     #Effects: Will delete the user from the user collection based on the if the 
     #         username exists. 
-    def deleteUser(self, User):
+    def deleteUser(self, userName):
         
-        if not self.checkForUser(User):
+        if not self.checkForUser(userName):
             return False
         else:
-            jsonDict = json.loads(User)
-            self.userCollection.delete_one({"_id" : jsonDict['_id']})
+            self.userCollection.delete_one({"_id" : userName})
             return True
 
 
@@ -137,19 +135,3 @@ if __name__ == '__main__':
 #list_collection_names
 #myclient.list_databases():
 
-
-#test = POFDB(url)
-#cluster = MongoClient(var)
-#temp = cluster.admin.command('ping')
-#print(temp)
-#dbs = cluster.list_databases()
-#collections = cluster.list
-
-#for db in dbs:
-#    print(db)
-
-#db = POFDB()
-#print(db.userCollection.find_one({"_id" : 1}))
-
-#for cursor in db.userCollection.find({"_id" : 0}):
-#    print(cursor)
