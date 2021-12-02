@@ -49,7 +49,10 @@ class User:
     def getEmail(self):
         return self.email
 
-    
+    #Requires: psw and salt
+    #Modifies: 
+    #Effects: When called and given a password and a salt, will first convert both to type byte
+    #if not already in that form, and then return a hash of the psw using the salt
     def hashPassword(psw, salt):
         if not isinstance(salt, bytes) :
             salt = salt.encode('utf-8')
@@ -92,7 +95,13 @@ class User:
     #the json contains all the needed info
     def jsonToUser(user_json):
         
-        user_dict = json.loads(user_json)
+        #Determined if is not already an instance of a dictionary
+        if not isinstance(user_json, dict):
+            user_dict = json.loads(user_json)
+        else:
+            user_dict = user_json
+
+        #checks if the passed user dictionary contains all of the required inforamtion
         if User.verifyIfJsonIsUser(user_dict):
             return User(user_dict['_id'], user_dict['email'], user_dict['password'], user_dict['salt'])
         else:

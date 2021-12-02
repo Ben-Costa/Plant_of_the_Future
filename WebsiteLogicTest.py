@@ -12,7 +12,7 @@ class TestMgDBClass(unittest.TestCase):
         self.testDB.userCollection.delete_one({"_id" : "NonExisting"})
 
       
-
+    ###Registration Logic Testing###
     #check initializtion of db and make sure db class is filled
     def testRegistrationUserNotExist(self):
         if self.testDB.addUser(self.testUser2.userToJson()):
@@ -23,17 +23,18 @@ class TestMgDBClass(unittest.TestCase):
     def testRegistrationUserExist(self):
         self.testDB.userCollection.insert_one({
             "_id" : "NonExisting",
-            "email": "bh@bmail.com",
+            "email": "b@bmail.com",
             "password": "12345",
             "salt": "1234"
          })
         if self.testDB.addUser(self.testUser2.userToJson()):
             self.assertEqual(self.testDB.checkForUser(self.testUser2.getUserName()), True)
         else:
-            self.assertEqual(self.testDB.checkForUser(self.testUser2.getUserName()), False)
+            tempUser = User.jsonToUser(self.testDB.getUser(self.testUser2.getUserName()))
+            self.assertEqual(tempUser.getEmail(), "b@bmail.com")
 
 
 if __name__ == '__main__':
 
-    print("running")
+    print("Running Website Logic Integration Testing")
     unittest.main()

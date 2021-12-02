@@ -6,8 +6,6 @@ from pymongo.errors import ConfigurationError, ConnectionFailure, OperationFailu
 from .to_ignore import var
 import uuid, json
 
-#db = cluster["test1"]
-#collection = db["test"]
 
 class POFDB:
 
@@ -40,9 +38,6 @@ class POFDB:
             self.connection_status = False
             return
 
-
-
-        #self.userCollection.insert_one({"_id": 1 ,"name" : "Ben"})
 
     def getConnectionStatus(self):
         return self.connection_status
