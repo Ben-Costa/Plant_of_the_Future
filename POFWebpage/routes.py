@@ -2,7 +2,7 @@ from POFWebpage import app, db
 from flask import render_template, redirect, url_for, flash, redirect
 from POFWebpage.forms import RegistrationForm, LoginForm
 from POFWebpage.UserClass import User
-import hashlib
+import hashlib, os, binascii
 
 @app.route('/')
 @app.route('/home')
@@ -29,21 +29,28 @@ def login_page():
         try:  
             #newUser = User(form.username.data, form.email.data, form.password.data)
             #check if username exists
+            print("0")
             if db.checkForUser(form.username.data):
                 #Get user from database
                 checkUser = db.getUser(form.username.data)
+                print(User.jsonToUser(checkUser).checkPassWordsMatch('c01dbc707537304023dc25a69e97685ab8dba8ca4c7027dceac48e1658afcf8d'))
+                print(User.jsonToUser(checkUser).getPassword())
+
                 if User.jsonToUser(checkUser).checkPassWordsMatch(form.password.data):
+                    print("1")
                     flash(f'Successfully logged into user: {form.username.data}', 'success')
-                    return redirect(url_for('pof_contact'))
+                    return redirect(url_for('about_page'))
                 else:
+                    print("2")
                     flash(f'Password does not match', 'danger')
                     return render_template('login_page.html', form = form)
             else:
+                print("3")
                 flash(f'Username does not exist', 'danger')
                 return render_template('login_page.html', form = form)
         except:
             print("Error logging in. Please try again")
-            return render_template('pof_registration.html', form = form)
+            return render_template('pof_login.html', form = form)
     return render_template('pof_login.html', title ='Login', form = form)
 
 

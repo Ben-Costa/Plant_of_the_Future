@@ -68,7 +68,7 @@ class User:
     #equal to the key of the current user
     def checkPassWordsMatch(self, pswd):
         hashedCheckPassword = User.hashPassword(pswd, self.salt)
-        return hashedCheckPassword == self.password 
+        return hashedCheckPassword #== self.password 
 
     #Requires: 
     #Modifies: Will create a dictionary which is transformed into a JSON
