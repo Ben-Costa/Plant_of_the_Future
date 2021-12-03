@@ -26,15 +26,15 @@ def login_page():
     form = LoginForm()
     #if submitted data is valid with the form
     if form.validate_on_submit():
-        try:  
+
+        #try:  
             #newUser = User(form.username.data, form.email.data, form.password.data)
             #check if username exists
-            print("0")
             if db.checkForUser(form.username.data):
                 #Get user from database
+                print("0")
+ 
                 checkUser = db.getUser(form.username.data)
-                print(User.jsonToUser(checkUser).checkPassWordsMatch('c01dbc707537304023dc25a69e97685ab8dba8ca4c7027dceac48e1658afcf8d'))
-                print(User.jsonToUser(checkUser).getPassword())
 
                 if User.jsonToUser(checkUser).checkPassWordsMatch(form.password.data):
                     print("1")
@@ -43,14 +43,14 @@ def login_page():
                 else:
                     print("2")
                     flash(f'Password does not match', 'danger')
-                    return render_template('login_page.html', form = form)
+                    return render_template('pof_login.html', form = form)
             else:
                 print("3")
                 flash(f'Username does not exist', 'danger')
-                return render_template('login_page.html', form = form)
-        except:
-            print("Error logging in. Please try again")
-            return render_template('pof_login.html', form = form)
+                return render_template('pof_login.html', form = form)
+        #except:
+        #    print("Error logging in. Please try again")
+        #    return render_template('pof_login.html', form = form)
     return render_template('pof_login.html', title ='Login', form = form)
 
 

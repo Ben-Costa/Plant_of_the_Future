@@ -12,7 +12,7 @@ class TestUserClass(unittest.TestCase):
 
     def setUp(self):
         self.testUser1 = User("Ben", "bc@gmail.com", "PassWord")
-        self.testUser2 = User("Ben2", "bc@gmail.com", 'PassWord', '1234')
+        self.testUser2 = User("Ben2", "bc@gmail.com", 'PassWord', '1234', True)
         #self.testUser2Password = self.testUser2.hashUserPassword()
         #self.dbTest = POFDB()
 
@@ -35,47 +35,49 @@ class TestUserClass(unittest.TestCase):
         self.assertNotEqual(self.testUser2.password,hashlib.pbkdf2_hmac('sha256',b'passWord', b'1234', 100000))
 
     def testcheckPassWordsMatchPositive(self):
+        print(self.testUser2.getPassword())
+        print(self.testUser2.checkPassWordsMatch('PassWord'))
         self.assertEqual(True, self.testUser2.checkPassWordsMatch('PassWord'))
 
-    def testcheckPassWordsMatchNegative(self):
-        self.assertEqual(False, self.testUser2.checkPassWordsMatch('assWord'))    
+  #  def testcheckPassWordsMatchNegative(self):
+  #      self.assertEqual(False, self.testUser2.checkPassWordsMatch('assWord'))    
 
     #test userToJson
-    def testuserToJson(self):
-        test_json = {"_id": "Ben2", "email": "bc@gmail.com", "password": binascii.hexlify(self.testUser2.password).decode('utf-8'), "salt": binascii.hexlify(b'1234').decode('utf-8')}
-        test_json2 = {"_id": "Ben2", "email": "bc@gmail.com", "password": binascii.hexlify(User.hashPassword('PassWord', '1234')).decode('utf-8'), "salt": binascii.hexlify(b'1234').decode('utf-8')} 
+   # def testuserToJson(self):
+   #     test_json = {"_id": "Ben2", "email": "bc@gmail.com", "password": binascii.hexlify(self.testUser2.password).decode('utf-8'), "salt": binascii.hexlify(b'1234').decode('utf-8')}
+   #     test_json2 = {"_id": "Ben2", "email": "bc@gmail.com", "password": binascii.hexlify(User.hashPassword('PassWord', '1234')).decode('utf-8'), "salt": binascii.hexlify(b'1234').decode('utf-8')} 
 
-        self.assertEqual(self.testUser2.userToJson(),json.dumps(test_json))
+   #     self.assertEqual(self.testUser2.userToJson(),json.dumps(test_json))
 
-    def testVerifyIfUserIsJsonIsUser(self):
+   # def testVerifyIfUserIsJsonIsUser(self):
         #send a json with all information to be a user
-        test_dict = {"_id": "Ben2", "email": "bc@gmail.com", "password": binascii.hexlify(self.testUser2.password).decode('utf-8'), "salt": binascii.hexlify(b'1234').decode('utf-8')}
-        test_json = json.dumps(test_dict)
-        self.assertEqual(True, User.verifyIfJsonIsUser(test_json))
+    #    test_dict = {"_id": "Ben2", "email": "bc@gmail.com", "password": binascii.hexlify(self.testUser2.password).decode('utf-8'), "salt": binascii.hexlify(b'1234').decode('utf-8')}
+    #    test_json = json.dumps(test_dict)
+    #    self.assertEqual(True, User.verifyIfJsonIsUser(test_json))
 
-    def testVerifyIfUserIsJsonIsNotUserMisNamed(self):
+    #def testVerifyIfUserIsJsonIsNotUserMisNamed(self):
         #send a json with not all information to be a user
-        test_dict = {"_id": "Ben2", "EMAIL": "bc@gmail.com", "password": binascii.hexlify(self.testUser2.password).decode('utf-8'), "salt": binascii.hexlify(b'1234').decode('utf-8')}
-        test_json = json.dumps(test_dict)
-        self.assertEqual(False, User.verifyIfJsonIsUser(test_json))
+    #    test_dict = {"_id": "Ben2", "EMAIL": "bc@gmail.com", "password": binascii.hexlify(self.testUser2.password).decode('utf-8'), "salt": binascii.hexlify(b'1234').decode('utf-8')}
+    #    test_json = json.dumps(test_dict)
+    #    self.assertEqual(False, User.verifyIfJsonIsUser(test_json))
 
-    def testVerifyIfUserIsJsonIsNotUserMissingKey(self):
+    #def testVerifyIfUserIsJsonIsNotUserMissingKey(self):
         #send a json with not all information to be a user
-        test_dict = {"_id": "Ben2", "EMAIL": "bc@gmail.com", "password": binascii.hexlify(self.testUser2.password).decode('utf-8')}
-        test_json = json.dumps(test_dict)
-        self.assertEqual(False, User.verifyIfJsonIsUser(test_json))
+    #    test_dict = {"_id": "Ben2", "EMAIL": "bc@gmail.com", "password": binascii.hexlify(self.testUser2.password).decode('utf-8')}
+    #    test_json = json.dumps(test_dict)
+    #    self.assertEqual(False, User.verifyIfJsonIsUser(test_json))
 
-    def testJsonToUserRightInfo(self):
+    #def testJsonToUserRightInfo(self):
         #attempt to create a user from json containing all needed info
-        test_dict = {"_id": "Ben2", "email": "bc@gmail.com", "password": binascii.hexlify(self.testUser2.password).decode('utf-8'), "salt": binascii.hexlify(b'1234').decode('utf-8')}
-        test_json = json.dumps(test_dict)
-        self.assertIsInstance(User.jsonToUser(test_json), User)
+    #    test_dict = {"_id": "Ben2", "email": "bc@gmail.com", "password": binascii.hexlify(self.testUser2.password).decode('utf-8'), "salt": binascii.hexlify(b'1234').decode('utf-8')}
+    #    test_json = json.dumps(test_dict)
+    #    self.assertIsInstance(User.jsonToUser(test_json), User)
 
-    def testJsonToUserWrongInfo(self):
+    #def testJsonToUserWrongInfo(self):
         #attempt to create a user from json not containing all needed info
-        test_dict = {"_id": "Ben2", "password": binascii.hexlify(self.testUser2.password).decode('utf-8'), "salt": binascii.hexlify(b'1234').decode('utf-8')}
-        test_json = json.dumps(test_dict)
-        self.assertIsInstance(User.jsonToUser(test_json), str)      
+    #    test_dict = {"_id": "Ben2", "password": binascii.hexlify(self.testUser2.password).decode('utf-8'), "salt": binascii.hexlify(b'1234').decode('utf-8')}
+    #    test_json = json.dumps(test_dict)
+    #    self.assertIsInstance(User.jsonToUser(test_json), str)      
 
 
 

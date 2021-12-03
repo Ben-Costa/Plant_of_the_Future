@@ -10,24 +10,27 @@ class User:
 
     #Requires: Username, email, password, optional salt
     #Effects: When passed the proper information, will return a user class
-    def __init__(self, Username, email, password, salt=None):
+    def __init__(self, Username, email, password, salt=None, plainTxtPswd : bool = None):
+
+        self.Username = Username
+        self.email = email   
 
         if salt is None:
-            self.Username = Username
-            self.email = email    
             self.salt = os.urandom(32)
             self.password = User.hashPassword(password, self.salt)   
             #self.organization = organization
-        else:
-            self.Username = Username
-            self.email = email    
+        else:  
             #salt will be stored as byte
             if isinstance(salt, bytes):
                 self.salt = salt 
             else:
                self.salt = salt.encode('utf-8')
-            self.password = User.hashPassword(password, salt)  
+            if plainTxtPswd is True:
+                self.password = User.hashPassword(password, self.salt)
+            else:
+                self.password = password
             #self.organization = organization
+
 
 #######Depreciated######################    
     #Requires: 
@@ -68,7 +71,7 @@ class User:
     #equal to the key of the current user
     def checkPassWordsMatch(self, pswd):
         hashedCheckPassword = User.hashPassword(pswd, self.salt)
-        return hashedCheckPassword #== self.password 
+        return binascii.hexlify(hashedCheckPassword).decode('utf-8') #== self.password 
 
     #Requires: 
     #Modifies: Will create a dictionary which is transformed into a JSON

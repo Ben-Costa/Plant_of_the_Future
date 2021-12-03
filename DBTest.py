@@ -8,7 +8,7 @@ class TestMgDBClass(unittest.TestCase):
     
     def setUp(self):
         self.testUser1 = User("Ben", "bc@gmail.com", "PassWord")
-        self.testUser2 = User("NonExisting", "bh@bmail.com", "12345", "1234")
+        self.testUser2 = User("NonExisting", "bh@bmail.com", "12345", "1234", True)
         self.testDB = POFDB()
         self.testDB.userCollection.delete_one({"_id" : "NonExisting"})
 
