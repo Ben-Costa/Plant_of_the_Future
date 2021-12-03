@@ -8,23 +8,31 @@ import hashlib, os, binascii
 
 class User:
 
-    #Requires: Username, email, password, optional salt
-    #Effects: When passed the proper information, will return a user class
+    #Requires: Username, email, password, optional salt 
+    #Effects: When passed the proper information, will return a user class. 
+    # If passed 3 arguments, will create a random salt and store as string (hexified), will then use this and password 
+    # to have a password
+    # If passed a salt and no plainTxtPswd (ex: from db json), will assume password is hashed and simply store psw 
+    # and salt as string
+    #If passed salt and True for plainTxtPswd (ex: creating user within code with known hash), will
+    #create hash password from plaintext password and store as string
+    #Stores password and hash as hex string to allow for easy movement to from db and other functions as
+    #there are limitations with bytes type
     def __init__(self, Username, email, password, salt=None, plainTxtPswd : bool = None):
 
         self.Username = Username
         self.email = email   
 
         if salt is None:
-            self.salt = os.urandom(32)
+            self.salt = binascii.hexlify(os.urandom(32)).decode('utf-8')
             self.password = User.hashPassword(password, self.salt)   
             #self.organization = organization
         else:  
             #salt will be stored as byte
-            if isinstance(salt, bytes):
-                self.salt = salt 
-            else:
-               self.salt = salt.encode('utf-8')
+            #if isinstance(salt, bytes):
+            self.salt = salt 
+            #else:
+            #   self.salt = salt.encode('utf-8')
             if plainTxtPswd is True:
                 self.password = User.hashPassword(password, self.salt)
             else:
@@ -83,7 +91,7 @@ class User:
             "email": self.email,
             "password": self.password,
             #"password": str(self.hashUserPassword()).replace("'", '"'),#.decode('utf-8'),
-            "salt": binascii.hexlify(self.salt).decode('utf-8')#.replace("'", '"')
+            "salt": self.salt
             #"first_name": self.first_name,
             #"last_name": self.last_name,
             #"organization": self.organization

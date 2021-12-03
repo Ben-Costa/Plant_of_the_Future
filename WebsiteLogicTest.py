@@ -7,7 +7,7 @@ class TestMgDBClass(unittest.TestCase):
     
     def setUp(self):
         self.testUser1 = User("Ben", "bc@gmail.com", "PassWord")
-        self.testUser2 = User("NonExisting", "bh@bmail.com", "12345", "1234")
+        self.testUser2 = User("NonExisting", "bh@bmail.com", "12345", "1234", True)
         self.testDB = POFDB()
         self.testDB.userCollection.delete_one({"_id" : "NonExisting"})
 
@@ -24,7 +24,7 @@ class TestMgDBClass(unittest.TestCase):
         self.testDB.userCollection.insert_one({
             "_id" : "NonExisting",
             "email": "b@bmail.com",
-            "password": "12345",
+            "password": self.testUser2.getPassword(),
             "salt": "1234"
          })
         if self.testDB.addUser(self.testUser2.userToJson()):

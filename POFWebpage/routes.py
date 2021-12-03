@@ -32,20 +32,14 @@ def login_page():
             #check if username exists
             if db.checkForUser(form.username.data):
                 #Get user from database
-                print("0")
- 
                 checkUser = db.getUser(form.username.data)
-
                 if User.jsonToUser(checkUser).checkPassWordsMatch(form.password.data):
-                    print("1")
                     flash(f'Successfully logged into user: {form.username.data}', 'success')
                     return redirect(url_for('about_page'))
                 else:
-                    print("2")
                     flash(f'Password does not match', 'danger')
                     return render_template('pof_login.html', form = form)
             else:
-                print("3")
                 flash(f'Username does not exist', 'danger')
                 return render_template('pof_login.html', form = form)
         #except:
