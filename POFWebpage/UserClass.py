@@ -63,7 +63,7 @@ class User:
         if not isinstance(psw, bytes) :
             psw = psw.encode('utf-8')
 
-        return hashlib.pbkdf2_hmac('sha256', psw, salt, 100000)
+        return binascii.hexlify(hashlib.pbkdf2_hmac('sha256', psw, salt, 100000)).decode('utf-8')
     
     #Requires: string pswd
     #Modifies: 
@@ -71,7 +71,7 @@ class User:
     #equal to the key of the current user
     def checkPassWordsMatch(self, pswd):
         hashedCheckPassword = User.hashPassword(pswd, self.salt)
-        return binascii.hexlify(hashedCheckPassword).decode('utf-8') #== self.password 
+        return hashedCheckPassword == self.password 
 
     #Requires: 
     #Modifies: Will create a dictionary which is transformed into a JSON
@@ -81,7 +81,7 @@ class User:
         user_Dict = {
             "_id" : self.Username,
             "email": self.email,
-            "password": binascii.hexlify(self.password).decode('utf-8'),
+            "password": self.password,
             #"password": str(self.hashUserPassword()).replace("'", '"'),#.decode('utf-8'),
             "salt": binascii.hexlify(self.salt).decode('utf-8')#.replace("'", '"')
             #"first_name": self.first_name,

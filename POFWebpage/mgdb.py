@@ -15,7 +15,6 @@ class POFDB:
             cluster = MongoClient(var)
             db = cluster["POFDataBase"]
             temp = cluster.admin.command('ping')
-            print(temp)
             
 
             self.mgclient = cluster
