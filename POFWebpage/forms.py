@@ -17,3 +17,6 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators= [DataRequired()])
     remember = BooleanField('Remeber Me')
     submit = SubmitField('Login')
+
+class MailingListForm(FlaskForm):
+    email = StringField('Email', validators= [DataRequired(), Email()])

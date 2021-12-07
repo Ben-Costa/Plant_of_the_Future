@@ -1,6 +1,6 @@
 from POFWebpage import app, db
 from flask import render_template, redirect, url_for, flash, redirect
-from POFWebpage.forms import RegistrationForm, LoginForm
+from POFWebpage.forms import RegistrationForm, LoginForm, MailingListForm
 from POFWebpage.UserClass import User
 import hashlib, os, binascii
 
@@ -8,6 +8,11 @@ import hashlib, os, binascii
 @app.route('/home')
 def home_page():
     checkDBWorking(db)
+    form = MailingListForm
+    if form.validate_on_submit():
+        db.AddToMailingList(form.email.data)
+        flash(f'You were added to the mailing list', 'success')
+        return render_template('pof_home.html')
     return render_template('pof_home.html')
 
 @app.route('/about')
