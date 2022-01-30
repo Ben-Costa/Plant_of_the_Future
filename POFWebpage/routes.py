@@ -1,18 +1,22 @@
+from flask.wrappers import Request
 from POFWebpage import app, db
-from flask import render_template, redirect, url_for, flash, redirect
+from flask import render_template, redirect, url_for, flash, request
 from POFWebpage.forms import RegistrationForm, LoginForm, MailingListForm
 from POFWebpage.UserClass import User
 import hashlib, os, binascii
 
-@app.route('/')
-@app.route('/home')
+@app.route('/', methods = ["GET", "POST"])
+@app.route('/home', methods = ["GET", "POST"])
 def home_page():
     checkDBWorking(db)
-    form = MailingListForm
-    if form.validate_on_submit():
-        db.AddToMailingList(form.email.data)
-        flash(f'You were added to the mailing list', 'success')
-        return render_template('pof_home.html')
+    #print(request.form.get('email'))
+    if request.method == 'POST':
+        if db.addToEmailList(request.form.get('email')):
+            flash(f'You were added to the mailing list', 'success')
+            return render_template('pof_home.html')
+        else:
+            flash(f'There was an issue adding you to the mailing list', 'danger')
+            return render_template('pof_home.html')           
     return render_template('pof_home.html')
 
 @app.route('/about')

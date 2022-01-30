@@ -1,5 +1,6 @@
 #from typing_extensions import ParamSpecKwargs
 from flask import Flask
+from jinja2.utils import F
 import pymongo 
 from pymongo import MongoClient
 from pymongo.errors import ConfigurationError, ConnectionFailure, OperationFailure
@@ -12,6 +13,7 @@ class POFDB:
     def __init__(self):
         
         try:
+            print(var)
             cluster = MongoClient(var)
             db = cluster["POFDataBase"]
             temp = cluster.admin.command('ping')
@@ -20,6 +22,7 @@ class POFDB:
             self.mgclient = cluster
             self.db = db
             self.userCollection = db["Users"]
+            self.emailList = db["Email List"]
             self.connection_status = True
             #get databases
             #dbs = cluster.list_databases()
@@ -41,11 +44,24 @@ class POFDB:
     def getConnectionStatus(self):
         return self.connection_status
 
+    #Requires: email (email will be properly formatted as html email type handles that)
+    #Modifies: adds email to the email list in the POFDatabase
+    #Effects: When passed an email, will add it to the email list database if the 
+    #email does not alreay exist, if the email exists, then it will do nothing.
+    def addToEmailList(self, email):
+        if not self.emailList.find_one({"_id" : email}):
+            self.emailList.insert_one({"_id" : email})
+            return True
+        else:
+            return False
+
     #Requires: 
-    #Modifies: 
-    #Effects:
-    def verify_Location():
-        pass
+    #Modifies: adds email to the email list in the POFDatabase
+    #Effects: When passed an email, will add it to the email list database if the 
+    #email does not alreay exist, if the email exists, then it will do nothing.
+    def getAllEmails(self):
+        return self.emailList.find({})
+
 
     #####User interface#####
     #Requires: userName
@@ -101,7 +117,31 @@ class POFDB:
 
 #usage
 if __name__ == '__main__':
-    pass
+    try:
+            cluster = MongoClient(var)
+            db = cluster["POFDataBase"]
+            temp = cluster.admin.command('ping')
+            
+
+            mgclient = cluster
+            db = db
+            userCollection = db["Users"]
+            emailList = db["Email List"]
+            connection_status = True
+            #get databases
+            #dbs = cluster.list_databases()
+            #print(dbs)
+            #get collections
+    except ConfigurationError:
+        print("Configuration Error: Database Connection Failed")
+        connection_status = False
+    except ConnectionFailure:
+        print("Execption Error: Database Connection Failed")
+        connection_status = False
+    except OperationFailure:
+        print("Authentication Failure: Invalid Credentials")
+        connection_status = False
+    #pass
     #On registration
     #1. Get form info
     #make a user class
